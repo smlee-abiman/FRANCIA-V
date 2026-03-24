@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>SystemSettingPage.qml</file>
+        <file>TestAndSetPage.qml</file>
+        <file>ColorPattern.qml</file>
+        <file>TenKey.qml</file>
+        <file>RealTargetMain.qml</file>
+        <file>MasterView.qml</file>
+        <file>Touch.qml</file>
+        <file>ControlPanel.qml</file>
+    </qresource>
+</RCC>

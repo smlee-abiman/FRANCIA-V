@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/01.WORK/05.developement/2026/**)"
+    ]
+  }
+}

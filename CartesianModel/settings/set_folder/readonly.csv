@@ -1,0 +1,43 @@
+;,;,;,;,;,;,;,;,;,;,;,;,,,,
+;group,1,;BitType,,,,,,,,,,
+false
+false, false, false, false 
+false, false, false
+false
+;group,2,;ByteType,,,,,,,,,,,,,,
+false
+false
+;group,3,;WordType,,,,,,,,,,,,,,
+false
+false, false, false, false
+false, false
+false, false
+false, false
+false, false
+false, false
+false, false
+false, false
+false, false
+false, false
+false, false
+false, false
+false, false, false
+false
+;group,4,;Longype,,,,,,,,,,,,,,
+false
+false
+false
+false
+false
+false
+false
+false
+false
+false
+false
+;group,5,;StringType,,,,,,,,,,,,,,
+false
+false, false, false, false, false, false, false, false, false
+false, false, false, false, false, false, false, false
+false
+;group,6,;PointType,,,,,,,,,,,,,,

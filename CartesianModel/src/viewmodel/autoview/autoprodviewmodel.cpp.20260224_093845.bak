@@ -1,0 +1,209 @@
+﻿#include "autoprodviewmodel.h"
+
+AutoProdViewModel::AutoProdViewModel(ResourceManager *resource, CommunicationThread * comm)
+    : ViewModelBase(resource, comm)
+{
+    m_modbusManager = ModbusManager::get_instance();
+    if (m_modbusManager){
+        //qDebug() << "AutoAxisViewModel:m_modbusManager is share";
+    }
+
+    m_fetchTime = 0;
+    m_cycleTime = 0;
+    m_moldingTime = 0;
+    m_oneFetchNum = 0;
+    m_fetchNum = 0;
+    m_prodNum = 0;
+    m_progNum = 0;
+    m_badRate = 0;
+    m_badCount = 0;
+    m_notificationTime = 0;
+    m_prodEndYear = 0;
+    m_prodEndMonth = 0;
+    m_prodEndDay = 0;
+    m_prodEndHour = 0;
+    m_prodEndMin = 0;
+    m_prodEndSec = 0;
+}
+
+AutoProdViewModel::~AutoProdViewModel()
+{
+
+}
+
+void AutoProdViewModel::startMonitoring()
+{
+    m_pageIng = true;
+    if (!m_communication){
+        qCritical("m_communication is Null");
+        return;
+    }
+    connect(m_communication, &CommunicationThread::finish, this, &AutoProdViewModel::onFinished);
+    connect(m_modbusManager, &ModbusManager::endModbusPageWriteReady, this, &AutoProdViewModel::endModbusPageWriteReady, Qt::DirectConnection);
+}
+void AutoProdViewModel::stopMonitoring()
+{
+    m_pageIng = false;
+    if (!m_communication){
+        qCritical("m_communication is Null");
+        return;
+    }
+    disconnect(m_communication, &CommunicationThread::finish, this, &AutoProdViewModel::onFinished);
+    disconnect(m_modbusManager, &ModbusManager::endModbusPageWriteReady, this, &AutoProdViewModel::endModbusPageWriteReady);
+}
+
+void AutoProdViewModel::setFetchTime(int fetchTime)
+{
+    if(m_fetchTime != fetchTime){
+        m_fetchTime = fetchTime;
+
+        emit fetchTimeChanged(m_fetchTime);
+    }
+}
+
+void AutoProdViewModel::setCycleTime(int cycleTime)
+{
+    if(m_cycleTime != cycleTime){
+        m_cycleTime = cycleTime;
+
+        emit cycleTimeChanged(m_cycleTime);
+    }
+}
+
+void AutoProdViewModel::setMoldingTime(int moldingTime)
+{
+    if(m_moldingTime != moldingTime){
+        m_moldingTime = moldingTime;
+
+        emit moldingTimeChanged(m_moldingTime);
+    }
+}
+
+void AutoProdViewModel::setOneFetchNum(int oneFetchNum)
+{
+    if(m_oneFetchNum != oneFetchNum){
+        m_oneFetchNum = oneFetchNum;
+
+        emit oneFetchNumChanged(m_oneFetchNum);
+    }
+}
+
+void AutoProdViewModel::setFetchNum(int fetchNum)
+{
+    if(m_fetchNum != fetchNum){
+        m_fetchNum = fetchNum;
+
+        emit fetchNumChanged(m_fetchNum);
+    }
+}
+
+void AutoProdViewModel::setProdNum(int prodNum)
+{
+    if(m_prodNum != prodNum){
+        m_prodNum = prodNum;
+
+        emit prodNumChanged(m_prodNum);
+    }
+}
+
+void AutoProdViewModel::setProgNum(int progNum)
+{
+    if(m_progNum != progNum){
+        m_progNum = progNum;
+
+        emit progNumChanged(m_progNum);
+    }
+}
+
+void AutoProdViewModel::setBadRate(int badRate)
+{
+    if(m_badRate != badRate){
+        m_badRate = badRate;
+
+        emit badRateChanged(m_badRate);
+    }
+}
+
+void AutoProdViewModel::setBadCount(int badCount)
+{
+    if(m_badCount != badCount){
+        m_badCount = badCount;
+
+        emit badCountChanged(m_badCount);
+    }
+}
+
+void AutoProdViewModel::setNotificationTime(int notificationTime)
+{
+    if(m_notificationTime != notificationTime){
+        m_notificationTime = notificationTime;
+
+        emit notificationTimeChanged(m_notificationTime);
+    }
+}
+
+void AutoProdViewModel::setProdEnd(int year, int month, int day, int hour, int min, int sec)
+{
+    if(m_prodEndYear != year || m_prodEndMonth != month || m_prodEndDay != day || m_prodEndHour != hour || m_prodEndMin != min || m_prodEndSec != sec){
+        m_prodEndYear = year;
+        m_prodEndMonth = month;
+        m_prodEndDay = day;
+        m_prodEndHour = hour;
+        m_prodEndMin = min;
+        m_prodEndSec = sec;
+
+        emit prodEndChanged(prodEnd());
+    }
+}
+
+void AutoProdViewModel::setDataLoaded(bool dataLoaded)
+{
+    if(m_dataLoaded != dataLoaded){
+        m_dataLoaded = dataLoaded;
+        emit dataLoadedChanged(m_dataLoaded);
+    }
+}
+
+QString AutoProdViewModel::prodEnd()
+{
+    QString s_year = QString::number(2000 + m_prodEndYear).rightJustified(4, '0');
+    QString s_month = QString::number(m_prodEndMonth).rightJustified(2, '0');
+    QString s_day = QString::number(m_prodEndDay).rightJustified(2, '0');
+    QString s_hour = QString::number(m_prodEndHour).rightJustified(2, '0');
+    QString s_min = QString::number(m_prodEndMin).rightJustified(2, '0');
+    QString s_sec = QString::number(m_prodEndSec).rightJustified(2, '0');
+
+    return s_year + "/" + s_month + "/" + s_day + " " + s_hour + ":" + s_min + ":" + s_sec;
+}
+
+void AutoProdViewModel::startPageChanging()
+{
+    setDataLoaded(false);
+    m_pageChanging = true;
+}
+
+
+void AutoProdViewModel::onFinished(){
+    if(m_pageChanging == false && m_modbusManager->getIsPageChanging() == false){
+        setFetchTime(m_modbusManager->getWordReceiveDataRG(2761));
+        setCycleTime(m_modbusManager->getWordReceiveDataRG(2762));
+        setMoldingTime(m_modbusManager->getWordReceiveDataRG(2763));
+        setOneFetchNum(m_modbusManager->getWordReceiveDataRG(2777));
+        setFetchNum(m_modbusManager->getLongReceiveDataRG(2775));
+        setProdNum(m_modbusManager->getLongReceiveDataRG(2764));
+        setProgNum(m_modbusManager->getLongReceiveDataRG(2779));
+        setBadRate(m_modbusManager->getWordReceiveDataRG(2768));
+        setBadCount(m_modbusManager->getLongReceiveDataRG(2766));
+        setNotificationTime(m_modbusManager->getWordReceiveDataRG(2778));
+        setProdEnd(m_modbusManager->getReceiveDataRG(2769), m_modbusManager->getReceiveDataRG(2770), m_modbusManager->getReceiveDataRG(2771), m_modbusManager->getReceiveDataRG(2772), m_modbusManager->getReceiveDataRG(2773), m_modbusManager->getReceiveDataRG(2774));
+        setDataLoaded(true);
+    }
+}
+
+void AutoProdViewModel::endModbusPageWriteReady(QList<int> writeData)
+{
+    if ((writeData.size() == 3) &&
+        ((writeData[0] == 3) && (writeData[1] == 0) && (writeData[2] == 0))) {
+        m_pageChanging = false;
+    }
+}

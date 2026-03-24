@@ -1,0 +1,33 @@
+<RCC>
+    <qresource prefix="/">
+        <file>SystemSettingPanel.qml</file>
+        <file>qml/ComboboxEx/ComboboxEx.qml</file>
+        <file>qml/ComboboxEx/ComboPopup.qml</file>
+        <file>qml/ComboboxEx/ItemLayout.qml</file>
+        <file>qml/Common/LabelAddress.qml</file>
+        <file>qml/Common/NumberCell.qml</file>
+        <file>qml/Common/RowCategoryCapt.qml</file>
+        <file>qml/LedSwitch/LedSwitch.qml</file>
+        <file>qml/LedSwitch/LedSwitchForm.ui.qml</file>
+        <file>qml/LedSwitch/LedSwitchLook.qml</file>
+        <file>qml/LedSwitch/LedSwitchLookForm.ui.qml</file>
+        <file>qml/PageBitType/BitTypePage.qml</file>
+        <file>qml/PageBitType/BitTypePageForm.ui.qml</file>
+        <file>qml/PageBitType/IOSwitch.qml</file>
+        <file>qml/PageBitType/IOSwitchForm.ui.qml</file>
+        <file>qml/PageByteType/ByteTypePage.qml</file>
+        <file>qml/PageByteType/ByteTypePageForm.ui.qml</file>
+        <file>qml/PageLongType/LongTypePage.qml</file>
+        <file>qml/PageLongType/LongTypePageForm.ui.qml</file>
+        <file>qml/PageOtherType/OtherTypePage.qml</file>
+        <file>qml/PageOtherType/OtherTypePageForm.ui.qml</file>
+        <file>qml/PageWordType/WordTypePage.qml</file>
+        <file>qml/PageWordType/WordTypePageForm.ui.qml</file>
+        <file>DebugWindow.qml</file>
+        <file>qml/Common/StringCell.qml</file>
+        <file>qml/PagePointType/PointTypePage.qml</file>
+        <file>qml/PagePointType/CategoryHeader01.qml</file>
+        <file>qml/PagePointType/CategoryHeader02.qml</file>
+        <file>qml/PagePointType/CategoryPointData.qml</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,15 @@
+QT.ftp.VERSION = 5.0.0
+QT.ftp.name = QtFtp
+QT.ftp.module = Qt5Ftp
+QT.ftp.libs = $$QT_MODULE_LIB_BASE
+QT.ftp.includes = $$QT_MODULE_INCLUDE_BASE $$QT_MODULE_INCLUDE_BASE/QtFtp
+QT.ftp.frameworks =
+QT.ftp.bins = $$QT_MODULE_BIN_BASE
+QT.ftp.depends = core network
+QT.ftp.uses =
+QT.ftp.module_config = v2 staticlib
+QT.ftp.DEFINES = QT_FTP_LIB
+QT.ftp.enabled_features =
+QT.ftp.disabled_features =
+QT_CONFIG +=
+QT_MODULES += ftp
