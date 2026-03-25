@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>images/splash.png</file>
-        <file>images/loading.jpg</file>
+        <file>images/loading.png</file>
     </qresource>
 </RCC>

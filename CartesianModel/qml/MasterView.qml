@@ -62,7 +62,7 @@ Item {
             fillMode: Image.PreserveAspectCrop
 
             property int tryIndex: 0
-            property string requestedSource: resourceManager.imagePath + "/loading.jpg"
+            property string requestedSource: resourceManager.imagePath + "/loading.png"
 
             source: requestedSource
 
@@ -70,11 +70,11 @@ Item {
                 if (status === Image.Error) {
                     if (tryIndex === 0) {
                         tryIndex = 1
-                        requestedSource = "file:///C:/Users/SMLEE/Downloads/francia-v0.0-master/CartesianModel/images/loading.jpg"
+                        requestedSource = "file:///C:/Users/SMLEE/Downloads/francia-v0.0-master/CartesianModel/images/loading.png"
                         source = requestedSource
                     } else if (tryIndex === 1) {
                         tryIndex = 2
-                        requestedSource = ":/images/loading.jpg"
+                        requestedSource = ":/images/loading.png"
                         source = requestedSource
                     }
                 }
@@ -94,7 +94,7 @@ Item {
 
         Text {
             anchors.centerIn: parent
-            text: "Image path: " + resourceManager.imagePath + "/loading.jpg\nStatus: " + splashBg.status
+            text: "Image path: " + resourceManager.imagePath + "/loading.png\nStatus: " + splashBg.status
             color: "white"
             font.pixelSize: 16
             z: 1001
